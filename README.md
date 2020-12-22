@@ -5,28 +5,23 @@
 - 隐藏区；  
 - 数据回填；  
 
-## 脚本  
+## 脚本 
+ 
 ```
-## Project setup
-yarn install
+// 安装依赖
+npm install
 
-## Compiles and hot-reloads for development
-yarn run serve
+// 本地开发
+npm run serve
 
-## Compiles and minifies for production
-yarn run build
+// 构建生产环境
+npm run build
 
-## Run your tests
-yarn run test
+// 检查修复代码
+npm run lint
 
-## Lints and fixes files
-yarn run lint
-
-## Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
-
-## build lib
-yarn run build:lib
+// 构建库
+npm run build:lib
 ```
 
 

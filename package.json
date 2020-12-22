@@ -6,7 +6,8 @@
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
-    "build:lib": "vue-cli-service build --target lib --no-clean  --name districtpicker src/DistrictPicker.vue"
+    "pretty": "prettier --write src/*.{js,vue}",
+    "build:lib": "vue-cli-service build --target lib --no-clean  --name districtpicker src/components/DistrictPicker.vue"
   },
   "dependencies": {
     "core-js": "^3.4.3",
@@ -19,6 +20,7 @@
     "babel-eslint": "^10.0.3",
     "eslint": "^5.16.0",
     "eslint-plugin-vue": "^5.0.0",
+    "prettier": "2.2.1",
     "vue-template-compiler": "^2.6.10"
   },
   "eslintConfig": {

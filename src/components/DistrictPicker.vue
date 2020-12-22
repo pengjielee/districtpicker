@@ -3,7 +3,9 @@
     <div class="district-header">
       <div :class="['tabs-' + tab]">
         <span @click="handleTabProvince">{{ currentProvinceName }}</span>
-        <span v-if="showCityTab && !onlyProvince" @click="handleTabCity">{{ currentCityName }}</span>
+        <span v-if="showCityTab && !onlyProvince" @click="handleTabCity">{{
+          currentCityName
+        }}</span>
         <span v-if="showAreaTab && !onlyProvince && !hideArea">{{ currentAreaName }}</span>
       </div>
     </div>
@@ -16,8 +18,8 @@
             :class="[
               'item',
               {
-                'selected': province.name === currentProvinceName ? true : false
-              }
+                selected: province.name === currentProvinceName ? true : false,
+              },
             ]"
             @click="handleChooseProvince(province)"
           >
@@ -33,8 +35,8 @@
             :class="[
               'item',
               {
-                'selected': province.name === currentProvinceName ? true : false
-              }
+                selected: province.name === currentProvinceName ? true : false,
+              },
             ]"
             @click="handleChooseProvince(province)"
           >
@@ -48,8 +50,8 @@
             :class="[
               'item',
               {
-                'selected': city.name === currentCityName ? true : false
-              }
+                selected: city.name === currentCityName ? true : false,
+              },
             ]"
             @click="handleChooseCity(city)"
           >
@@ -63,8 +65,8 @@
             :class="[
               'item',
               {
-                'selected': area.name === currentAreaName ? true : false
-              }
+                selected: area.name === currentAreaName ? true : false,
+              },
             ]"
             @click="handleChooseArea(area)"
           >
@@ -77,33 +79,33 @@
 </template>
 
 <script>
-import DISTRICTS from "./districts.js"
+import DISTRICTS from './districts.js';
 
-const DEFAULT_CODE = "0";
+const DEFAULT_CODE = '0';
 
 export default {
-  name: "DistrictPicker",
+  name: 'DistrictPicker',
   props: {
     province: {
       type: String,
-      default: ""
+      default: '',
     },
     city: {
       type: String,
-      default: ""
+      default: '',
     },
     area: {
       type: String,
-      default: ""
+      default: '',
     },
     onlyProvince: {
       type: Boolean,
-      default: false
+      default: false,
     },
     hideArea: {
       type: Boolean,
-      default: false
-    }
+      default: false,
+    },
   },
   created() {
     this.DISTRICTS = DISTRICTS;
@@ -118,13 +120,13 @@ export default {
 
       const provinceObj = this.DISTRICTS[DEFAULT_CODE];
       for (let key in provinceObj) {
-        if(provinceObj[key] === this.currentProvinceName){
-          const province = { id: key, name: provinceObj[key]};
+        if (provinceObj[key] === this.currentProvinceName) {
+          const province = { id: key, name: provinceObj[key] };
           this.handleChooseProvince(province);
           const cityObj = this.DISTRICTS[province.id];
-          for(let key in cityObj){
-            if(cityObj[key] === this.currentCityName){
-              const city = { id: key, name: cityObj[key]};
+          for (let key in cityObj) {
+            if (cityObj[key] === this.currentCityName) {
+              const city = { id: key, name: cityObj[key] };
               this.handleChooseCity(city);
               break;
             }
@@ -150,9 +152,9 @@ export default {
       this.currentProvinceName = province.name;
       this.currentProvinceId = province.id;
       this.selectedProvince = province;
-      if(this.onlyProvince){
-        this.$emit("selected",province)
-      }else{
+      if (this.onlyProvince) {
+        this.$emit('selected', province);
+      } else {
         this.tab = 2;
         this.showCityTab = true;
         this.getCities(province.id);
@@ -162,11 +164,11 @@ export default {
       this.currentCityName = city.name;
       this.currentCityId = city.id;
       this.selectedCity = city;
-      if(this.hideArea){
+      if (this.hideArea) {
         const { selectedProvince, selectedCity } = this;
-        const result = { "province": selectedProvince, "city": selectedCity}
-        this.$emit("selected", result);
-      }else{
+        const result = { province: selectedProvince, city: selectedCity };
+        this.$emit('selected', result);
+      } else {
         this.tab = 3;
         this.showAreaTab = true;
         this.getAreas(city.id);
@@ -177,8 +179,8 @@ export default {
       this.currentAreaId = area.id;
       this.selectedArea = area;
       const { selectedProvince, selectedCity, selectedArea } = this;
-      const result = { "province": selectedProvince, "city": selectedCity, "area": selectedArea}
-      this.$emit("selected", result);
+      const result = { province: selectedProvince, city: selectedCity, area: selectedArea };
+      this.$emit('selected', result);
     },
     getProvinces() {
       let provinces = [];
@@ -212,27 +214,27 @@ export default {
     },
     resetArea() {
       this.currentAreaName = this.default.areaName;
-    }
+    },
   },
   data() {
     return {
       default: {
-        provinceName: "省",
-        cityName: "市",
-        areaName: "区"
+        provinceName: '省',
+        cityName: '市',
+        areaName: '区',
       },
       provinces: [],
       cities: [],
       areas: [],
-      currentProvinceName: "",
-      currentCityName: "",
-      currentAreaName: "",
+      currentProvinceName: '',
+      currentCityName: '',
+      currentAreaName: '',
       tab: 1,
       showCityTab: false,
       showAreaTab: false,
-      DISTRICTS: null
+      DISTRICTS: null,
     };
-  }
+  },
 };
 </script>
 
@@ -271,7 +273,7 @@ export default {
   border-bottom: 1px solid #ddd;
   cursor: pointer;
 }
-.district-picker .district-body .list .selected{
+.district-picker .district-body .list .selected {
   color: red;
 }
 </style>
